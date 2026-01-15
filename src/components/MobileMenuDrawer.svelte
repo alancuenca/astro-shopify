@@ -78,14 +78,12 @@
     aria-labelledby="mobile-menu-title"
     role="dialog"
     aria-modal="true"
-  >
-    <div
+  ><div
       in:fade={{ duration: 500 }}
       out:fade={{ duration: 500 }}
       class="fixed inset-0 bg-slate-400/50 backdrop-blur-sm transition-opacity"
-    ></div>
-
-    <div class="fixed inset-0 overflow-hidden">
+></div>
+    <div class="fixed inset-0 overflow-hidden min-h-screen backdrop-blur-sm">
       <div class="absolute inset-0 overflow-hidden">
         <div
           class="pointer-events-none fixed inset-y-0 left-0 flex max-w-full pr-6 focus:outline-none"
@@ -103,7 +101,7 @@
             <div class="flex flex-col min-h-full max-h-screen bg-white">
               <div class="flex items-start justify-between shadow-sm p-5">
                 <h2
-                  class="text-xs font-semibold uppercase tracking-[0.35em] text-zinc-600"
+                  class="text-2xl flex gap-4 items-center font-bold text-zinc-800"
                   id="mobile-menu-title"
                 >
                   Menu
