@@ -76,3 +76,11 @@ export const ProductResult = z
     featuredImage: ImageResult.nullable(),
   })
   .nullable();
+
+export const CollectionResult = z
+  .object({
+    title: z.string(),
+    handle: z.string(),
+    image: ImageResult,
+  })
+  .nullable();

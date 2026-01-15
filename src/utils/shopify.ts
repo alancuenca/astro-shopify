@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { CartResult, ProductResult } from "./schemas";
+import { CartResult, CollectionResult, ProductResult } from "./schemas";
 import { config } from "./config";
 import {
   ProductsQuery,
@@ -10,6 +10,7 @@ import {
   RemoveCartLinesMutation,
   ProductRecommendationsQuery,
   CollectionByHandleQuery,
+  HomepageCollectionsQuery,
 } from "./graphql";
 
 // Make a request to Shopify's GraphQL API  and return the data object from the response body as JSON data.
@@ -155,6 +156,29 @@ export const getCollectionProducts = async (options: {
   return {
     title: collection.title,
     products: parsedProducts,
+  };
+};
+
+export const getHomepageCollections = async (options: { buyerIP: string }) => {
+  const { buyerIP } = options;
+  const data = await makeShopifyRequest(
+    HomepageCollectionsQuery,
+    {
+      men: "men",
+      women: "women",
+      jewelry: "jewelry",
+      bestsellers: "best-sellers",
+    },
+    buyerIP
+  );
+
+  return {
+    men: data?.men ? CollectionResult.parse(data.men) : null,
+    women: data?.women ? CollectionResult.parse(data.women) : null,
+    jewelry: data?.jewelry ? CollectionResult.parse(data.jewelry) : null,
+    bestsellers: data?.bestsellers
+      ? CollectionResult.parse(data.bestsellers)
+      : null,
   };
 };
 

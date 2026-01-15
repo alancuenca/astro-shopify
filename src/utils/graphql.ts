@@ -82,6 +82,19 @@ fragment productFragment on Product {
 }
 `;
 
+const COLLECTION_FRAGMENT = `#graphql
+fragment collectionFragment on Collection {
+  title
+  handle
+  image {
+    url
+    width
+    height
+    altText
+  }
+}
+`;
+
 export const ProductsQuery = `#graphql
 query ($first: Int!) {
     products(first: $first) {
@@ -127,6 +140,29 @@ export const CollectionByHandleQuery = `#graphql
     }
   }
   ${PRODUCT_FRAGMENT}
+`;
+
+export const HomepageCollectionsQuery = `#graphql
+  query (
+    $men: String!
+    $women: String!
+    $jewelry: String!
+    $bestsellers: String!
+  ) {
+    men: collection(handle: $men) {
+      ...collectionFragment
+    }
+    women: collection(handle: $women) {
+      ...collectionFragment
+    }
+    jewelry: collection(handle: $jewelry) {
+      ...collectionFragment
+    }
+    bestsellers: collection(handle: $bestsellers) {
+      ...collectionFragment
+    }
+  }
+  ${COLLECTION_FRAGMENT}
 `;
 
 export const GetCartQuery = `#graphql

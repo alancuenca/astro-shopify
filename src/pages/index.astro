@@ -1,5 +1,9 @@
 ---
-import { getCollectionProducts, getProducts } from "./../utils/shopify";
+import {
+  getCollectionProducts,
+  getHomepageCollections,
+  getProducts,
+} from "./../utils/shopify";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Products from "../components/Products.astro";
 import { setCache } from "../utils/cache";
@@ -21,6 +25,33 @@ const products =
   bestsellersCollection?.products ||
   (await getProducts({ buyerIP: ip, limit: 6 }));
 const bestsellersTitle = bestsellersCollection?.title || "Bestsellers";
+const homepageCollections = await getHomepageCollections({ buyerIP: ip });
+const collections = [
+  {
+    title: homepageCollections.women?.title || "Women",
+    description: "Refined silhouettes and elevated layers.",
+    href: "/collections/women",
+    image: homepageCollections.women?.image || null,
+  },
+  {
+    title: homepageCollections.men?.title || "Men",
+    description: "Tailored essentials for modern wardrobes.",
+    href: "/collections/men",
+    image: homepageCollections.men?.image || null,
+  },
+  {
+    title: homepageCollections.jewelry?.title || "Jewelry",
+    description: "Statement pieces and everyday shine.",
+    href: "/collections/jewelry",
+    image: homepageCollections.jewelry?.image || null,
+  },
+  {
+    title: homepageCollections.bestsellers?.title || "Bestsellers",
+    description: "The pieces everyone returns for.",
+    href: "/collections/best-sellers",
+    image: homepageCollections.bestsellers?.image || null,
+  },
+];
 
 setCache.short(Astro);
 ---
@@ -35,7 +66,7 @@ setCache.short(Astro);
     ctaLabel="Shop bestsellers"
     ctaHref="/collections/best-sellers"
   />
-  <CollectionsGrid />
+  <CollectionsGrid collections={collections} />
   <section class="container py-16 text-center">
     <p class="luxury-eyebrow">Social</p>
     <h2 class="section-title">Followed by 180k+</h2>

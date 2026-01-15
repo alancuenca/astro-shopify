@@ -1,21 +1,47 @@
 ---
 import CartIcon from "./CartIcon.svelte";
+import MobileMenuDrawer from "./MobileMenuDrawer.svelte";
+
+const navLinks = [
+  { label: "Bestsellers", href: "/collections/best-sellers" },
+  { label: "Men", href: "/collections/men" },
+  { label: "Women", href: "/collections/women" },
+  { label: "Jewelry", href: "/collections/jewelry" },
+  { label: "About", href: "/about" },
+];
 ---
 
 <header class="sticky top-0 z-40">
-  <div class="border-b border-black/10 bg-[#f7f3ef]/80 backdrop-blur-xl">
+  <div class="border-b border-black/10 bg-cream/80 backdrop-blur-xl">
     <div class="container flex items-center justify-between py-4">
-      <a href="/" class="flex items-center gap-3">
-        <span class="luxury-eyebrow">Cabrillo, CA</span>
-        <span class="text-lg font-semibold tracking-[0.22em]">Beardless Cub</span>
-      </a>
+      <div class="flex items-center gap-3 lg:gap-6">
+        <div class="lg:hidden">
+          <MobileMenuDrawer links={navLinks} client:load />
+        </div>
+        <a href="/" class="flex flex-col leading-none">
+          <span
+            class="text-[10px] font-semibold uppercase tracking-[0.45em] text-ink/60"
+          >
+            Cabrillo, CA
+          </span>
+          <span
+            class="text-base font-semibold uppercase tracking-[0.3em] sm:text-lg"
+          >
+            Beardless Cub
+          </span>
+        </a>
+      </div>
 
-      <nav class="hidden items-center gap-8 text-xs font-semibold uppercase tracking-[0.25em] md:flex">
-        <a class="transition hover:text-black/60" href="/collections/best-sellers">Bestsellers</a>
-        <a class="transition hover:text-black/60" href="/collections/men">Men</a>
-        <a class="transition hover:text-black/60" href="/collections/women">Women</a>
-        <a class="transition hover:text-black/60" href="/collections/jewelry">Jewelry</a>
-        <a class="transition hover:text-black/60" href="/about">About</a>
+      <nav
+        class="hidden items-center gap-8 text-xs font-semibold uppercase tracking-[0.25em] lg:flex"
+      >
+        {
+          navLinks.map((link) => (
+            <a class="transition hover:text-black/60" href={link.href}>
+              {link.label}
+            </a>
+          ))
+        }
       </nav>
 
       <div class="flex items-center gap-4">
@@ -25,7 +51,10 @@ import CartIcon from "./CartIcon.svelte";
         >
           Search
         </a>
-        <a class="button-outline hidden sm:inline-flex" href="/collections/best-sellers">
+        <a
+          class="button-outline hidden lg:inline-flex"
+          href="/collections/best-sellers"
+        >
           Shop Now
         </a>
         <CartIcon client:load />
