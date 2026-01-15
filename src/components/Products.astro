@@ -6,15 +6,32 @@ import ProductCard from "./ProductCard.astro";
 const ProductsResult = z.array(ProductResult);
 export interface Props {
   products: z.infer<typeof ProductsResult>;
+  title?: string;
+  subtitle?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
 }
-const { products } = Astro.props as Props;
+const {
+  products,
+  title = "Bestsellers",
+  subtitle = "Curated pieces our community reaches for again and again.",
+  ctaLabel = "View all",
+  ctaHref = "/collections/best-sellers",
+} = Astro.props as Props;
 ---
 
 <section>
   <div class="container py-16 sm:py-20">
-    <h2 class="sr-only">Products</h2>
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <p class="luxury-eyebrow">Shop</p>
+        <h2 class="section-title">{title}</h2>
+        <p class="section-subtitle">{subtitle}</p>
+      </div>
+      <a class="button-outline" href={ctaHref}>{ctaLabel}</a>
+    </div>
 
-    <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+    <div class="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
       {products.map((product) => <ProductCard product={product} />)}
     </div>
   </div>

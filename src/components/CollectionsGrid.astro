@@ -1,0 +1,53 @@
+---
+const collections = [
+  {
+    title: "Women",
+    description: "Refined silhouettes and elevated layers.",
+    href: "/collections/women",
+  },
+  {
+    title: "Men",
+    description: "Tailored essentials for modern wardrobes.",
+    href: "/collections/men",
+  },
+  {
+    title: "Jewelry",
+    description: "Statement pieces and everyday shine.",
+    href: "/collections/jewelry",
+  },
+  {
+    title: "Bestsellers",
+    description: "The pieces everyone returns for.",
+    href: "/collections/best-sellers",
+  },
+];
+---
+
+<section>
+  <div class="container py-12">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <p class="luxury-eyebrow">Collections</p>
+        <h2 class="section-title">Shop by category</h2>
+        <p class="section-subtitle">Curated for a boutique experience with premium finishes.</p>
+      </div>
+    </div>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {collections.map((collection) => (
+        <a
+          class="card-shell group flex flex-col justify-between gap-6 p-6 transition hover:-translate-y-1 hover:shadow-lg"
+          href={collection.href}
+        >
+          <div>
+            <p class="luxury-eyebrow">{collection.title}</p>
+            <p class="mt-3 text-sm text-[#0b0b0f]/70">{collection.description}</p>
+          </div>
+          <span class="text-xs font-semibold uppercase tracking-[0.25em] text-[#0b0b0f]">
+            Shop now
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

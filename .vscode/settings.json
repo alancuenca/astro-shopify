@@ -1,3 +1,29 @@
 {
-  "typescript.validate.enable": true
+  "typescript.validate.enable": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+
+  "editor.formatOnSave": true,
+
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+
+  "tailwindCSS.experimental.classRegex": [
+    ["class\\s*=\\s*[\"']([^\"']*)[\"']", "([^\"'\\s]*)"]
+  ],
+  "tailwindCSS.includeLanguages": {
+    "astro": "html",
+    "svelte": "html"
+  },
+
+  "files.associations": {
+    "*.astro": "astro"
+  },
+
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  }
 }

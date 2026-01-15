@@ -14,7 +14,9 @@ import ProductAccordions from "../../components/ProductAccordions.astro";
 
 const { handle } = Astro.params;
 const headers = Astro.request.headers;
-const ip = headers.get("x-vercel-forwarded-for") || Astro.clientAddress;
+const forwardedFor =
+  headers.get("x-nf-client-connection-ip") || headers.get("x-forwarded-for");
+const ip = forwardedFor?.split(",")[0]?.trim() || Astro.clientAddress;
 const product = await getProductByHandle({ handle: handle || "", buyerIP: ip });
 
 if (!product) {

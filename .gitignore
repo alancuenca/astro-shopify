@@ -19,3 +19,12 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+#other
+.cursor/
+
+# project notes (not for commit)
+PROJECT_NOTES.md
+
+# Local Netlify folder
+.netlify

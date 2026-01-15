@@ -1,17 +1,55 @@
 ---
-import { getProducts } from "./../utils/shopify";
+import { getCollectionProducts, getProducts } from "./../utils/shopify";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Products from "../components/Products.astro";
 import { setCache } from "../utils/cache";
+import HomeHero from "../components/HomeHero.astro";
+import CollectionsGrid from "../components/CollectionsGrid.astro";
+import TrustBar from "../components/TrustBar.astro";
 
-const title = "Astro + Shopify";
+const title = "Beardless Cub — Boutique Clothing & Jewelry";
 const headers = Astro.request.headers;
-const ip = headers.get("x-vercel-forwarded-for") || Astro.clientAddress;
-const products = await getProducts({ buyerIP: ip });
+const forwardedFor =
+  headers.get("x-nf-client-connection-ip") || headers.get("x-forwarded-for");
+const ip = forwardedFor?.split(",")[0]?.trim() || Astro.clientAddress;
+const bestsellersCollection = await getCollectionProducts({
+  handle: "best-sellers",
+  buyerIP: ip,
+  limit: 6,
+});
+const products =
+  bestsellersCollection?.products ||
+  (await getProducts({ buyerIP: ip, limit: 6 }));
+const bestsellersTitle = bestsellersCollection?.title || "Bestsellers";
 
 setCache.short(Astro);
 ---
 
 <BaseLayout title={title}>
-  <Products products={products} />
+  <HomeHero />
+  <TrustBar />
+  <Products
+    products={products}
+    title={bestsellersTitle}
+    subtitle="The most-loved styles from our Cabrillo boutique."
+    ctaLabel="Shop bestsellers"
+    ctaHref="/collections/best-sellers"
+  />
+  <CollectionsGrid />
+  <section class="container py-16 text-center">
+    <p class="luxury-eyebrow">Social</p>
+    <h2 class="section-title">Followed by 180k+</h2>
+    <p class="section-subtitle">
+      A community of stylists, founders, and tastemakers across the USA and
+      Canada.
+    </p>
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+      <a class="button-outline" href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+        Instagram
+      </a>
+      <a class="button-outline" href="https://pinterest.com" target="_blank" rel="noopener noreferrer">
+        Pinterest
+      </a>
+    </div>
+  </section>
 </BaseLayout>

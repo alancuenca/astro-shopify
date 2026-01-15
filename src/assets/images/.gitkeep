@@ -1,0 +1,2 @@
+# This folder is for local images that will be processed by Astro's Image component
+# Import images from this folder and use with <Image /> from astro:assets

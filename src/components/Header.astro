@@ -1,23 +1,35 @@
 ---
-import Logo from "./Logo.astro";
 import CartIcon from "./CartIcon.svelte";
 ---
 
 <header class="sticky top-0 z-40">
-  <div class="border-b bg-white/70 py-3 backdrop-blur-2xl">
-    <nav class="container grid grid-cols-3 items-center">
-      <a href="/">
-        <span class="sr-only">Logo</span>
-        <Logo />
+  <div class="border-b border-black/10 bg-[#f7f3ef]/80 backdrop-blur-xl">
+    <div class="container flex items-center justify-between py-4">
+      <a href="/" class="flex items-center gap-3">
+        <span class="luxury-eyebrow">Cabrillo, CA</span>
+        <span class="text-lg font-semibold tracking-[0.22em]">Beardless Cub</span>
       </a>
-      <h1
-        class="flex justify-center text-sm font-semibold text-gray-900 sm:text-xl"
-      >
-        Astro 🧑‍🚀 Shopify
-      </h1>
-      <div class="justify-self-end">
+
+      <nav class="hidden items-center gap-8 text-xs font-semibold uppercase tracking-[0.25em] md:flex">
+        <a class="transition hover:text-black/60" href="/collections/best-sellers">Bestsellers</a>
+        <a class="transition hover:text-black/60" href="/collections/men">Men</a>
+        <a class="transition hover:text-black/60" href="/collections/women">Women</a>
+        <a class="transition hover:text-black/60" href="/collections/jewelry">Jewelry</a>
+        <a class="transition hover:text-black/60" href="/about">About</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <a
+          class="hidden text-xs font-semibold uppercase tracking-[0.25em] text-black/70 transition hover:text-black lg:block"
+          href="/search"
+        >
+          Search
+        </a>
+        <a class="button-outline hidden sm:inline-flex" href="/collections/best-sellers">
+          Shop Now
+        </a>
         <CartIcon client:load />
       </div>
-    </nav>
+    </div>
   </div>
 </header>

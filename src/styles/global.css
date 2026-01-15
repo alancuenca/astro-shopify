@@ -4,6 +4,19 @@
   /* Animation */
   --animate-shake: shake 0.5s infinite;
 
+  /* Brand colors */
+  --color-ink: #0b0b0f;
+  --color-ink-60: rgba(11, 11, 15, 0.6);
+  --color-ink-40: rgba(11, 11, 15, 0.4);
+  --color-cream: #f7f3ef;
+  --color-sand: #eee7e0;
+  --color-gold: #c9a56b;
+  --color-gold-strong: #b89152;
+
+  /* Typography */
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
   @keyframes shake {
     0% {
       transform: translate(1px, 1px) rotate(0deg);
@@ -52,7 +65,15 @@
   }
 
   body {
-    @apply flex min-h-screen flex-col;
+    @apply flex min-h-screen flex-col bg-[#f7f3ef] text-[#0b0b0f];
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
   }
 
   main {
@@ -74,10 +95,31 @@
 
   .button {
     @apply flex items-center justify-center rounded-lg;
-    @apply bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-600;
-    @apply px-8 py-3 text-base font-medium text-white;
-    @apply transition hover:opacity-80;
+    @apply bg-[#0b0b0f] px-7 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-[#f7f3ef];
+    @apply transition hover:bg-[#1a1a21];
     @apply focus:ring-2 focus:ring-black focus:ring-offset-1 focus:outline-none;
     @apply disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .button-outline {
+    @apply flex items-center justify-center rounded-lg border border-[#0b0b0f];
+    @apply px-7 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-[#0b0b0f];
+    @apply transition hover:bg-[#0b0b0f] hover:text-[#f7f3ef];
+  }
+
+  .luxury-eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.3em] text-[#0b0b0f]/70;
+  }
+
+  .section-title {
+    @apply text-3xl font-semibold sm:text-4xl;
+  }
+
+  .section-subtitle {
+    @apply mt-3 text-base text-[#0b0b0f]/70;
+  }
+
+  .card-shell {
+    @apply rounded-2xl border border-[#0b0b0f]/10 bg-white shadow-sm;
   }
 }

@@ -12,7 +12,7 @@
   import Money from "./Money.svelte";
   import { clickOutside } from "../utils/click-outside";
 
-  let cartDrawerEl: HTMLDivElement = $state();
+  let cartDrawerEl: HTMLDivElement | undefined = $state();
 
   // Add classes to cart line items if cart is updating
   let cartIsUpdatingClass = $derived($isCartUpdating
@@ -64,6 +64,7 @@
           use:clickOutside={() => closeCartDrawer()}
           bind:this={cartDrawerEl}
           onkeydown={onKeyDown}
+          role="button"
         >
           <div
             in:fly={{ duration: 500, x: 500, opacity: 100 }}
@@ -157,7 +158,7 @@
                               {item.merchandise.product.title}
                             </a>
                             <p class="text-xs">
-                              <Money price={item.cost.amountPerQuantity} />
+                              <Money price={item.cost.amountPerQuantity} showCurrency={true} />
                             </p>
                           </div>
                           <div
@@ -169,6 +170,7 @@
                               }}
                               type="button"
                               disabled={$isCartUpdating}
+                              aria-label="Remove item from cart"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -187,7 +189,7 @@
                             </button>
                             <div>
                               <p class="font-medium">
-                                <Money price={item.cost.totalAmount} />
+                                <Money price={item.cost.totalAmount} showCurrency={true} />
                               </p>
                             </div>
                           </div>

@@ -1,0 +1,11 @@
+# Robots.txt for Astro Shopify Storefront
+# https://www.robotstxt.org/robotstxt.html
+
+User-agent: *
+Allow: /
+
+# Sitemap location (update domain when deploying)
+Sitemap: https://your-store.netlify.app/sitemap-index.xml
+
+# Block admin/api paths if any
+Disallow: /api/

@@ -13,11 +13,11 @@ const { product } = Astro.props as Props;
 
 <a
   href={`/products/${product?.handle}`}
-  class="group overflow-hidden rounded-lg border-l-orange-100 shadow hover:shadow-md"
+  class="card-shell group overflow-hidden transition hover:-translate-y-1 hover:shadow-lg"
 >
-  <div class="relative">
+  <div class="relative aspect-[3/4] overflow-hidden bg-[#eee7e0]">
     <ShopifyImage
-      classList=""
+      classList="h-full w-full object-cover"
       loading="eager"
       image={product?.featuredImage}
       sizes={`
@@ -32,30 +32,14 @@ const { product } = Astro.props as Props;
     <div
       class="absolute inset-0 z-10 grid items-end justify-items-center opacity-0 transition-all group-hover:bg-black/10 group-hover:opacity-100"
     >
-      <button class="button w-full gap-3 rounded-none">
-        <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="h-5 w-5"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-            ></path>
-          </svg>
-        </span>
+      <span class="button w-full gap-3 rounded-none text-xs">
         Shop now
-      </button>
+      </span>
     </div>
   </div>
-  <div class="flex justify-between py-6 px-5 text-zinc-700">
-    <h3 class="group-hover:underline">{product?.title}</h3>
-    <p class="font-bold">
+  <div class="flex items-center justify-between px-5 py-4 text-sm text-[#0b0b0f]/80">
+    <h3 class="font-medium tracking-wide">{product?.title}</h3>
+    <p class="font-semibold text-[#0b0b0f]">
       <Money price={product?.variants.nodes[0].price} />
     </p>
   </div>

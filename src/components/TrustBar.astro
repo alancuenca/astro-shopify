@@ -1,0 +1,33 @@
+---
+const items = [
+  {
+    title: "Free shipping",
+    description: "Complimentary shipping on orders over $150.",
+  },
+  {
+    title: "Easy returns",
+    description: "30-day returns with prepaid labels.",
+  },
+  {
+    title: "Secure checkout",
+    description: "Shopify-hosted checkout and encrypted payments.",
+  },
+  {
+    title: "Boutique service",
+    description: "Concierge support from Cabrillo, CA.",
+  },
+];
+---
+
+<section class="border-y border-black/10 bg-white">
+  <div class="container grid gap-6 py-10 sm:grid-cols-2 lg:grid-cols-4">
+    {items.map((item) => (
+      <div class="space-y-2">
+        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-[#0b0b0f]/70">
+          {item.title}
+        </p>
+        <p class="text-sm text-[#0b0b0f]/70">{item.description}</p>
+      </div>
+    ))}
+  </div>
+</section>
