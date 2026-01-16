@@ -1,73 +1,179 @@
-# Astro starter theme to build a headless ecommerce website with Shopify
+# Astro + Shopify Headless Storefront
 
-The theme is built with Svelte but you can use any framework you like (React, Vue, Solid etc.) thanks to Astro.
-Tailwind UI free components are used for the design.
+A high-performance headless ecommerce storefront built with Astro, Svelte 5, and Tailwind CSS v4 — powered by Shopify's Storefront API.
 
-![astro_shopify_preview](https://user-images.githubusercontent.com/10447155/214480671-8380f410-cbfb-4f53-a6bb-5c744073e2f2.jpg)
+## ✨ Features
 
-## 🧑‍🚀 Where to start
+- **Headless Architecture** — Decoupled frontend with full creative control
+- **Server-Side Rendering** — Fast initial page loads with Astro's SSR
+- **Edge Deployment** — Optimized for Netlify Edge Functions
+- **Cart Persistence** — Client-side cart state with Nanostores
+- **Type-Safe** — Full TypeScript support with Zod schema validation
+- **SEO Optimized** — Automatic sitemap, meta tags, and Open Graph support
+- **Responsive Design** — Mobile-first with Tailwind CSS v4
 
-1. Create a `.env` file based on `.env.example` with your Shopify store url and your public and private access tokens
-2. The credentials are used inside the `/utils/config.ts` file, you can update the API version there
-3. Run `npm install` or `yarn` or `pnpm install`
-4. Run `npm run dev` or `yarn run dev` or `pnpm run dev`
+## 🛠 Tech Stack
 
-## Shopify Configuration Guide
+| Technology                                                         | Version | Purpose                        |
+| :----------------------------------------------------------------- | :------ | :----------------------------- |
+| [Astro](https://astro.build)                                          | 5.x     | Static site generator with SSR |
+| [Svelte](https://svelte.dev)                                          | 5.x     | Interactive components         |
+| [Tailwind CSS](https://tailwindcss.com)                               | 4.x     | Utility-first styling          |
+| [Shopify Hydrogen React](https://shopify.dev/docs/api/hydrogen-react) | 2025.x  | Shopify primitives & hooks     |
+| [Nanostores](https://github.com/nanostores/nanostores)                | 1.x     | Lightweight state management   |
+| [Zod](https://zod.dev)                                                | 4.x     | Runtime schema validation      |
+| [Netlify](https://netlify.com)                                        | —      | Hosting & edge functions       |
 
-- Create a new account or use an existing one. https://accounts.shopify.com/store-login
-- Add the [Shopify Headless channel](https://apps.shopify.com/headless) to your store
-- Click on `Add Storefront`
-- Copy/Paste your `public` and `private` access tokens to your .env file
-- Next, check Storefront API access scopes
-  - `unauthenticated_read_product_listings` and `unauthenticated_read_product_inventory` access should be fine to get you started.
-  - Add more scopes if you require additional permissions.
+## 📋 Prerequisites
 
-### Shopify Troubleshooting
+- Node.js 20+
+- npm, yarn, or pnpm
+- Shopify store with Headless channel enabled
 
-- If you encounter an error like `error code 401` you likely didn't set this up correctly. Revisit your scopes and be sure add at least one test product. Also make sure you are using the `Storefront API` and not the `Admin API` as the endpoints and scopes are different.
-- If you do not see a checkout sidebar, or if it is empty after adding a product, you need to add an image to your test product.
+## 🧑‍🚀 Getting Started
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <your-repo-url>
+   cd astro-shopify
+   ```
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+3. **Configure environment variables**
+
+   Create a `.env` file in the project root:
+
+   ```env
+   PUBLIC_SHOPIFY_SHOP=your-store.myshopify.com
+   PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=your_public_token
+   PRIVATE_SHOPIFY_STOREFRONT_ACCESS_TOKEN=your_private_token
+   ```
+4. **Start the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+   Open [http://localhost:4321](http://localhost:4321) in your browser.
+
+## 🔐 Shopify Configuration
+
+### Setting Up the Headless Channel
+
+1. Log in to your Shopify admin at [accounts.shopify.com](https://accounts.shopify.com/store-login)
+2. Install the [Shopify Headless channel](https://apps.shopify.com/headless)
+3. Click **Add Storefront** to generate API credentials
+4. Copy both `public` and `private` access tokens to your `.env` file
+
+### Required API Scopes
+
+At minimum, enable these Storefront API scopes:
+
+- `unauthenticated_read_product_listings`
+- `unauthenticated_read_product_inventory`
+- `unauthenticated_write_checkouts`
+- `unauthenticated_read_checkouts`
+
+### Troubleshooting
+
+| Issue                 | Solution                                                                                 |
+| :-------------------- | :--------------------------------------------------------------------------------------- |
+| `401 Unauthorized`  | Verify API scopes and ensure you're using the**Storefront API**, not the Admin API |
+| Empty cart sidebar    | Add an image to your test products in Shopify admin                                      |
+| `403 Access Denied` | Check that your access token matches the correct environment (public vs private)         |
 
 ## 🚀 Project Structure
-
-Inside the project, you'll see the following folders and files:
 
 ```
 /
 ├── public/
+│   ├── favicon.svg
+│   └── robots.txt
 ├── src/
-│   └── components/
-│       └── Header.astro
-│   └── layouts/
-│       └── BaseLayout.astro
-│   └── pages/
-│       └── index.astro
-│   └── stores/
-│       └── cart.ts
-│   └── styles/
-│       └── global.css
+│   ├── assets/
+│   │   ├── images/
+│   │   └── videos/
+│   ├── components/
+│   │   ├── Header.astro
+│   │   ├── Footer.astro
+│   │   ├── ProductCard.astro
+│   │   ├── CartDrawer.svelte
+│   │   └── ...
+│   ├── layouts/
+│   │   ├── BaseLayout.astro
+│   │   └── NotFoundLayout.astro
+│   ├── pages/
+│   │   ├── index.astro
+│   │   ├── 404.astro
+│   │   ├── collections/
+│   │   │   └── [handle].astro
+│   │   └── products/
+│   │       └── [...handle].astro
+│   ├── stores/
+│   │   └── cart.ts
+│   ├── styles/
+│   │   └── global.css
 │   └── utils/
+│       ├── config.ts
+│       ├── graphql.ts
+│       ├── schemas.ts
 │       └── shopify.ts
-└── package.json
+├── astro.config.mjs
+├── package.json
+└── tsconfig.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### Key Directories
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
+| Directory           | Purpose                                                    |
+| :------------------ | :--------------------------------------------------------- |
+| `src/pages/`      | File-based routing — each `.astro` file becomes a route |
+| `src/components/` | Reusable Astro and Svelte components                       |
+| `src/utils/`      | Shopify API client, GraphQL queries, and helpers           |
+| `src/stores/`     | Nanostores for client-side state (cart, UI)                |
+| `src/assets/`     | Images and videos processed by Astro's build pipeline      |
+| `public/`         | Static assets served as-is (favicon, robots.txt)           |
 
 ## 🧞 Commands
 
-All commands are run from the root of the project, from a terminal:
+All commands are run from the project root:
 
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `npm install`          | Installs dependencies                            |
-| `npm run dev`          | Starts local dev server at `localhost:3000`      |
-| `npm run build`        | Build your production site to `./dist/`          |
-| `npm run preview`      | Preview your build locally, before deploying     |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro --help` | Get help using the Astro CLI                     |
+| Command               | Action                                 |
+| :-------------------- | :------------------------------------- |
+| `npm install`       | Install dependencies                   |
+| `npm run dev`       | Start dev server at `localhost:4321` |
+| `npm run build`     | Build production site to `./dist/`   |
+| `npm run preview`   | Preview production build locally       |
+| `npm run typecheck` | Run TypeScript type checking           |
+| `npm run astro ...` | Run Astro CLI commands                 |
 
-## ⚡️ Lighthouse
-![lighthouse_astro_shopify](https://user-images.githubusercontent.com/10447155/214448698-ce2a1ef6-6fbd-4fca-b8b6-c5194b72a15b.jpg)
+## 🌐 Deployment
+
+This project is configured for **Netlify** deployment:
+
+1. Connect your repository to Netlify
+2. Set environment variables in Netlify dashboard:
+   - `PUBLIC_SHOPIFY_SHOP`
+   - `PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN`
+   - `PRIVATE_SHOPIFY_STOREFRONT_ACCESS_TOKEN`
+3. Deploy — Netlify will auto-detect the Astro framework
+
+### Build Settings
+
+| Setting           | Value             |
+| :---------------- | :---------------- |
+| Build command     | `npm run build` |
+| Publish directory | `dist`          |
+| Node version      | `20`            |
+
+## ⚡️ Performance
+
+Built for Core Web Vitals excellence:
+
+## 📄 License
+
+MIT — see [LICENSE](LICENSE) for details.
