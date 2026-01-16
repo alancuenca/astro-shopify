@@ -137,7 +137,7 @@ export const getCollectionProducts = async (options: {
   limit?: number;
   buyerIP: string;
 }) => {
-  const { handle, limit = 6, buyerIP } = options;
+  const { handle, limit = 24, buyerIP } = options;
   const data = await makeShopifyRequest(
     CollectionByHandleQuery,
     { handle, first: limit },
@@ -155,6 +155,8 @@ export const getCollectionProducts = async (options: {
 
   return {
     title: collection.title,
+    description: collection.description || "",
+    image: collection.image || null,
     products: parsedProducts,
   };
 };

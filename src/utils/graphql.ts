@@ -130,6 +130,13 @@ export const CollectionByHandleQuery = `#graphql
   query ($handle: String!, $first: Int!) {
     collection(handle: $handle) {
       title
+      description
+      image {
+        url
+        width
+        height
+        altText
+      }
       products(first: $first) {
         edges {
           node {
